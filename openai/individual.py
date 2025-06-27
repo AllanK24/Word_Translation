@@ -26,7 +26,7 @@ def process_image(image_path, output_file):
     }
 
     payload = {
-        "model": "gpt-4o",
+        "model": "gpt-4o-mini",
         "messages": [
             {
                 "role": "system",
@@ -83,8 +83,8 @@ def process_images_in_folder(folder_path, output_txt_file):
 # Main script
 if __name__ == "__main__":
     # Path to your images directory
-    image_directory = r"D:\Programming\Projects\Word_Translation\images"
-    output_txt_file = 'output.txt'
+    image_directory = r"D:\Programming\Projects\Word_Translation\june\images"
+    output_txt_file = r'D:\Programming\Projects\Word_Translation\june\output.txt'
 
     # Start processing images sequentially
     process_images_in_folder(image_directory, output_txt_file)
