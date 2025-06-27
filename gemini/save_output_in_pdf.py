@@ -55,6 +55,7 @@ def save_json_to_pdf(data, output_path="translations.pdf"):
     }
 
     story = []
+    seen = set()  # Track seen (en, ru) pairs
 
     for entry in cleaned:
         en_word = entry.get("en", "").strip().capitalize()
@@ -62,10 +63,16 @@ def save_json_to_pdf(data, output_path="translations.pdf"):
         en_def = entry.get("en_def", "").strip()
         ru_def = entry.get("ru_def", "").strip()
 
+        key = (en_word.lower(), ru_word.lower())
+        if key in seen:
+            continue  # skip duplicate
+        seen.add(key)
+
         story.append(Paragraph(f"<b>{en_word}</b> — {ru_word}", styles['word']))
         story.append(Paragraph(en_def, styles['definition']))
         story.append(Paragraph(ru_def, styles['definition']))
         story.append(Spacer(1, 6))
+
 
     doc.build(story)
     print(f"[INFO] PDF saved to: {output_path}")
